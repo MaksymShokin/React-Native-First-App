@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, Button, TextInput} from 'react-native';
+import {StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList} from 'react-native';
 
 export default function App() {
   const [currentTask, setCurrentTask] = useState('');
@@ -8,8 +8,9 @@ export default function App() {
 
   const allTasks = listOfTasks.map(elem => {
     return (
-      <View style={{margin: 10, width: '80%', justifyContent: 'space-around', borderColor: 'red', border: 3}} key={elem}>
-        <Text style={{fontSize: 24, borderColor: 'brown', borderWidth: 3, paddingLeft: 10}}>{elem}</Text>
+      <View style={{margin: 10, marginLeft: 5,  width: '95%', justifyContent: 'space-around', border: 3, flexDirection: 'row', alignItems: 'center'}} key={elem}>
+        <Text style={{fontSize: 20, borderColor: 'black', borderWidth: 3, paddingLeft: 10, backgroundColor: '#ccc', flex: 1}}>{elem}</Text>
+        <Button style={{paddingRight: 10}} title={'delete'} onPress={deleteHandler}/>
       </View>
     )
   });
@@ -19,12 +20,18 @@ export default function App() {
   };
 
   const addTaskHandler = () => {
-    setListOfTasks(currentTasks => [...currentTasks, currentTask]);
+    setListOfTasks(currentTasks => {
+      return [...currentTasks, currentTask];
+    });
     setCurrentTask('')
   };
 
+  const deleteHandler = () => {
+
+  };
+
   return (
-    <View style={{padding: 50}}>
+    <View  style={{padding: 50}}>
       <Text style={styles.goals}>GOALS</Text>
       <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
         <TextInput
@@ -39,9 +46,9 @@ export default function App() {
           onPress={addTaskHandler}
         />
       </View>
-      <View>
+      <ScrollView>
         {allTasks}
-      </View>
+      </ScrollView>
 
     </View>
   );
