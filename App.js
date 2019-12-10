@@ -5,23 +5,13 @@ export default function App() {
   const [currentTask, setCurrentTask] = useState('');
   const [listOfTasks, setListOfTasks] = useState([]);
 
-
-  const allTasks = listOfTasks.map(elem => {
-    return (
-      <View style={{margin: 10, marginLeft: 5,  width: '95%', justifyContent: 'space-around', border: 3, flexDirection: 'row', alignItems: 'center'}} key={elem}>
-        <Text style={{fontSize: 20, borderColor: 'black', borderWidth: 3, paddingLeft: 10, backgroundColor: '#ccc', flex: 1}}>{elem}</Text>
-        <Button style={{paddingRight: 10}} title={'delete'} onPress={deleteHandler}/>
-      </View>
-    )
-  });
-
   const typeTaskHandler = input => {
     setCurrentTask(input)
   };
 
   const addTaskHandler = () => {
     setListOfTasks(currentTasks => {
-      return [...currentTasks, currentTask];
+      return [...currentTasks, { id: Math.random().toString(), value:currentTask }];
     });
     setCurrentTask('')
   };
@@ -46,10 +36,17 @@ export default function App() {
           onPress={addTaskHandler}
         />
       </View>
-      <ScrollView>
-        {allTasks}
-      </ScrollView>
-
+      <FlatList
+        keyExtractor={(item, index) => item.id}
+        data={listOfTasks}
+        renderItem={listItem => (
+            <View style={styles.listOfTasksView} >
+              <Text style={styles.listOfTasksText}>{listItem.item.value}</Text>
+              <Button style={{paddingRight: 10}} title={'delete'} onPress={deleteHandler}/>
+            </View>
+          )
+        }
+      />
     </View>
   );
 }
@@ -60,6 +57,22 @@ const styles = StyleSheet.create({
     color: 'orange',
     textAlign: 'center',
     marginBottom: 10
+  },
+  listOfTasksView: {
+    margin: 10,
+    marginLeft: 5,
+    width: '95%',
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  listOfTasksText: {
+    fontSize: 20,
+    borderColor: 'black',
+    borderWidth: 3,
+    paddingLeft: 10,
+    backgroundColor: '#ccc',
+    flex: 1
   }
 });
 
