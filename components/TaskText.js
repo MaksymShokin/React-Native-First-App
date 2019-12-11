@@ -1,14 +1,16 @@
 import React from 'react';
-import {Button, Text, View, StyleSheet} from 'react-native';
+import {Button, Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 
 
 const TaskText = props => {
   return (
-    <View style={styles.listOfTasksView} >
-      <Text style={styles.listOfTasksText}>{props.title}</Text>
-      <Button style={{paddingRight: 10}} title={'delete'} onPress={props.deleteHandler}/>
-    </View>
-    )
+    <TouchableOpacity>
+      <View style={styles.listOfTasksView}>
+        <Text style={styles.listOfTasksText}>{props.title}</Text>
+        <Button style={{paddingRight: 10}} title={'delete'} onPress={props.deleteHandler}/>
+      </View>
+    </TouchableOpacity>
+  )
 };
 
 const styles = StyleSheet.create({
