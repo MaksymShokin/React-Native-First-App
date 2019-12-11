@@ -1,6 +1,10 @@
 import React from 'react';
 import {Button, Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 
+// TouchableOpacity  opacity on touch
+// TouchableHighlight  background color on touch
+// TouchableNativeFeedback  effect on android
+// TouchableWithoutFeedback  no effect on touch
 
 const TaskText = props => {
   return (
