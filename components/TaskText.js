@@ -1,17 +1,12 @@
 import React from 'react';
-import {Button, Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-
-// TouchableOpacity  opacity on touch
-// TouchableHighlight  background color on touch
-// TouchableNativeFeedback  effect on android
-// TouchableWithoutFeedback  no effect on touch
+import {Button, Text, View, StyleSheet, TouchableOpacity, TouchableHighlight } from 'react-native';
 
 const TaskText = props => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => props.deleteHandler(props.id)}>
       <View style={styles.listOfTasksView}>
         <Text style={styles.listOfTasksText}>{props.title}</Text>
-        <Button style={{paddingRight: 10}} title={'delete'} onPress={props.deleteHandler}/>
+        <Button style={{paddingRight: 10}} title={'delete'} onPress={() => props.deleteHandler(props.id)}/>
       </View>
     </TouchableOpacity>
   )
