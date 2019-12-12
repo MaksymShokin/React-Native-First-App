@@ -12,7 +12,8 @@ export default function App() {
     setListOfTasks(currentTasks => {
       return [...currentTasks, {key: Math.random().toString(), id:Math.random().toString(), value: currentTask}];
     });
-    setCurrentTask('')
+    setCurrentTask('');
+    openAddTaskModal()
   };
 
   const deleteTaskHandler = taskId => {
@@ -29,7 +30,7 @@ export default function App() {
     <View style={styles.screen}>
       <Text style={styles.goals}>GOALS</Text>
       <Button title='Add new Goal!' onPress={openAddTaskModal}/>
-      <TaskInput addTaskHandler={addTaskHandler} visible={addTaskModalOpen}/>
+      <TaskInput addTaskHandler={addTaskHandler} visible={addTaskModalOpen} openModal={openAddTaskModal}/>
       <FlatList
         data={listOfTasks}
         renderItem={listItem => <TaskText deleteHandler={deleteTaskHandler} title={listItem.item.value} id={listItem.item.id}/>}
